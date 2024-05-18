@@ -1,0 +1,77 @@
+@if (patientList && patientList.length>0) {
+<div class="mat-elevation-z8 w-full">
+  <div class="flex justify-end p-8"><button routerLink="/create-patient" mat-raised-button color="primary">Add
+      Patient</button>
+    <button mat-button (click)="toggleAgeColumnVisibility()">
+      {{ showAgeColumn ? 'Ocultar Edad' : 'Mostrar Edad' }}
+    </button>
+  </div>
+  <table mat-table [dataSource]="patientList">
+    <ng-container matColumnDef="DNI">
+      <th mat-header-cell *matHeaderCellDef> DNI </th>
+      <td mat-cell *matCellDef="let element"> {{element.DNI}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.Nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Apellido">
+      <th mat-header-cell *matHeaderCellDef> Apellido </th>
+      <td mat-cell *matCellDef="let element"> {{element.Apellido}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CorreoElectronico">
+      <th mat-header-cell *matHeaderCellDef> Correo Electronico </th>
+      <td mat-cell *matCellDef="let element"> {{element.CorreoElectronico}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Telefonos">
+      <th mat-header-cell *matHeaderCellDef> Telefono </th>
+      <td mat-cell *matCellDef="let element"> {{element.Telefonos}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="FechaNacimiento">
+      <th mat-header-cell *matHeaderCellDef> FechaNacimiento </th>
+      <td mat-cell *matCellDef="let element"> {{element.FechaNacimiento}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Direccion">
+      <th mat-header-cell *matHeaderCellDef> Direccion </th>
+      <td mat-cell *matCellDef="let element"> {{element.Direccion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CiudadID">
+      <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+      <td mat-cell *matCellDef="let element">
+        {{ getCityName(element.CiudadID) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Edad">
+      <th mat-header-cell *matHeaderCellDef> Edad </th>
+      <td mat-cell *matCellDef="let element"> {{ showAgeColumn ? getAge(element.FechaNacimiento) + ' años' : '**' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Operaciones">
+      <th mat-header-cell *matHeaderCellDef> Operaciones </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" style="margin-right: 5px;" (click)="edit(element.id)">Edit</button>
+        <button mat-raised-button color="warn" (click)="delete(element.id)">Delete</button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+} @else {
+  <div class="mat-elevation-z8 w-full">
+    <div class="flex justify-end p-8"><button routerLink="/create-patient" mat-raised-button color="primary">Add
+        Patient</button>
+    </div>
+      <div class="flex justify-center p-8">
+        <p>No se encontraron resultados</p>
+      </div>
+  </div>
+}
