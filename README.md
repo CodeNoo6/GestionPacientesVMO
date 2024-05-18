@@ -1,2 +1,2 @@
-# GestionPacientesVMO
-Prueba Técnica VMO
+# Prueba Técnica VMO
+Camargo Rubén
